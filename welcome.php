@@ -1,5 +1,4 @@
 
-
 <?php
 	include("config.php");
 	session_start();
@@ -26,6 +25,7 @@
 	$orders='';
 	if($final->num_rows > 0)
 	{
+
 	    while($col=$final->fetch_assoc())
 	    {
 	       $orders=$col["orders"];
@@ -34,35 +34,7 @@
 	}
 
 	$strategies_ar=explode(',', $orders);
-	// foreach ($strategies_ar AS $index => $value)
- //    {
- //    	$strategies_ar[$index] = (int)$value; 
-	// 	// echo '<br>'.$strategies_ar[$index];
-	// 	$sql3="select * from strategies where strategy_id=$strategies_ar[$index]";
-	// 	$result2=$conn->query($sql3);
-	// 	if($result2->num_rows>0)
-	// 	{
-	// 		while($strategyrow=$result2->fetch_assoc())
-	// 		{
-	// 			$strategy_id=$strategyrow['strategy_id'];
-	// 			$strategy_name=$strategyrow['strategy_name'];
-	// 			$category=$strategyrow['category'];
-	// 			$about_short=$strategyrow['about_short'];
-	// 			$about_long=$strategyrow['about_long'];
-	// 			$image=$strategyrow['image'];
-	// 			$option1=$strategyrow['option1'];
-	// 			$option2=$strategyrow['option2'];
-	// 			$option3=$strategyrow['option3'];
-	// 			echo '<br>'.$strategy_id.', ';
-	// 			echo $strategy_name.' '.$category;
-	// 		}
-	// 	}
-	// }
-	// if(!isset($_SESSION['username'])) {
-	//    include_once("home.php");
-	//    exit;
-	// }
-
+	
 ?>
 
 <!DOCTYPE html>
@@ -274,7 +246,12 @@ background-size: cover;">
 
 			<!-- portolio wrapper -->
 			<div class="row portfolio-wrapper">
+
 				<?php
+				$sql="select * from strategies where strategy_id in (";
+				$sql.=$orders;
+				$sql.=");";
+				echo $sql;
 					foreach ($strategies_ar AS $index => $value)
 				    {
 				    	$strategies_ar[$index] = (int)$value; 
